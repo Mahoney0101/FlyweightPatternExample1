@@ -10,12 +10,10 @@ import java.util.Random;
 
 public class GUI extends JFrame{
 
-    private JButton draw;
-    private int windowWidth = 1750;
-    private int windowHeight = 1000;
-    private List<Soldier> nonFlyweightObjects;
+    private final int windowWidth = 1750;
+    private final int windowHeight = 1000;
 
-    private BufferedImage[] minionSprite = {
+    private final BufferedImage[] minionSprite = {
             ImageIO.read(getClass().getResource("/minion.png")),
             ImageIO.read(getClass().getResource("/saber.png")),
             ImageIO.read(getClass().getResource("/mutant.png")),
@@ -35,20 +33,18 @@ public class GUI extends JFrame{
         contentPane.setLayout(new BorderLayout());
         final JPanel  drawingPanel  = new JPanel();
 
-        draw = new JButton("Start Test");
+        JButton draw = new JButton("Start Test");
         contentPane.add(drawingPanel,  BorderLayout.CENTER);
         contentPane.add(draw, BorderLayout.SOUTH);
         draw.addActionListener(event -> {
             Graphics g = drawingPanel.getGraphics();
-            nonFlyweightObjects = new ArrayList<>();
             long startTime = System.currentTimeMillis();
-            for(int i=0; i < 100000; ++i) {
-                Soldier soldier = new Soldier(getRandImage(), getRandX(), getRandY(),getRandHeight(),getRandWidth());
-                nonFlyweightObjects.add(soldier);
-                soldier.drawNonFlyweight(g);
+            for(int i=0; i < 1000000; ++i) {
+                Soldier soldier = SoldierFactory.getSoldier(getRandImage());
+                soldier.draw(g, soldier.getImage(), getRandX(), getRandY(),getRandHeight(),getRandWidth());
             }
             long endTime = System.currentTimeMillis();
-            System.out.println("Computational Time " + (endTime - startTime) + " milliseconds and there are " + nonFlyweightObjects.size() + " objects in cache for this operation");
+            System.out.println("Computational Time " + (endTime - startTime) + " milliseconds and there are " + SoldierFactory.getCache() + " objects in cache for this operation");
         });
         this.add(contentPane);
         this.setVisible(true);
