@@ -41,10 +41,18 @@ class SoldierTest {
 
     @org.junit.jupiter.api.Test
     void getRegularCache(){
-        for(int i=0; i < 100000; ++i) {
+        for(int i=0; i < 10000000; ++i) {
             Soldier soldier = new Soldier(getRandImage(),getRandX(),getRandY(),getRandWidth(),getRandHeight());
             nonFlyweightList.add(soldier);
         }
-        Assert.assertEquals(100000, nonFlyweightList.size());
+        Assert.assertEquals(10000000, nonFlyweightList.size());
+    }
+
+    @org.junit.jupiter.api.Test
+    void getFactoryCache(){
+        for(int i=0; i < 10000000; ++i) {
+            Soldier soldier = SoldierFactory.getSoldier(getRandImage());
+        }
+        Assert.assertEquals(8, SoldierFactory.getCache());
     }
 }

@@ -1,5 +1,4 @@
 @startuml
-
 skinparam  classAttributeIconSize 0
 
     class Driver {
@@ -7,11 +6,9 @@ skinparam  classAttributeIconSize 0
     }
 
     class GUI {
-        ~ minionSprite : BufferedImage[]
-        ~ nonFlyweightObjects : List<Soldier>
-        ~ startDrawing : JButton
-        ~ windowHeight : int
-        ~ windowWidth : int
+        - minionSprite : BufferedImage[]
+        - windowHeight : int
+        - windowWidth : int
         + GUI()
         - getRandHeight()
         - getRandImage()
@@ -21,15 +18,20 @@ skinparam  classAttributeIconSize 0
     }
 
     class Soldier {
-        - X : int
-        - Y : int
-        - height : int
         - image : BufferedImage
-        - width : int
         + Soldier()
-        + drawNonFlyweight()
+        + draw()
     }
 
-  GUI -up-|> Driver
-  GUI o-- Soldier
+    class SoldierFactory {
+        {static} - soldierBySprite : HashMap<BufferedImage, Soldier>
+        {static} + getCache()
+        {static} + getSoldier()
+    }
+  
+
+  GUI -left- Driver
+  Soldier -right-o SoldierFactory
+  SoldierFactory -left- GUI
+
 @enduml

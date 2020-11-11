@@ -41,7 +41,7 @@ public class GUI extends JFrame{
             long startTime = System.currentTimeMillis();
             for(int i=0; i < 1000000; ++i) {
                 Soldier soldier = SoldierFactory.getSoldier(getRandImage());
-                soldier.draw(g, soldier.getImage(), getRandX(), getRandY(),getRandHeight(),getRandWidth());
+                soldier.draw(g, getRandX(), getRandY(),getRandHeight(),getRandWidth());
             }
             long endTime = System.currentTimeMillis();
             System.out.println("Computational Time " + (endTime - startTime) + " milliseconds and there are " + SoldierFactory.getCache() + " objects in cache for this operation");
