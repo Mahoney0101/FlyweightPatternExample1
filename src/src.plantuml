@@ -7,11 +7,11 @@ skinparam  classAttributeIconSize 0
     }
 
     class GUI {
-        ~ minionSprite : BufferedImage[]
-        ~ nonFlyweightObjects : List<Soldier>
-        ~ startDrawing : JButton
-        ~ windowHeight : int
-        ~ windowWidth : int
+        - minionSprite : BufferedImage[]
+        - nonFlyweightObjects : List<Soldier>
+        - draw : JButton
+        - windowHeight : int
+        - windowWidth : int
         + GUI()
         - getRandHeight()
         - getRandImage()

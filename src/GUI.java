@@ -10,12 +10,12 @@ import java.util.Random;
 
 public class GUI extends JFrame{
 
-    JButton startDrawing;
-    int windowWidth = 1750;
-    int windowHeight = 1000;
-    List<Soldier> nonFlyweightObjects;
+    private JButton draw;
+    private int windowWidth = 1750;
+    private int windowHeight = 1000;
+    private List<Soldier> nonFlyweightObjects;
 
-    BufferedImage[] minionSprite = {
+    private BufferedImage[] minionSprite = {
             ImageIO.read(getClass().getResource("/minion.png")),
             ImageIO.read(getClass().getResource("/saber.png")),
             ImageIO.read(getClass().getResource("/mutant.png")),
@@ -35,10 +35,10 @@ public class GUI extends JFrame{
         contentPane.setLayout(new BorderLayout());
         final JPanel  drawingPanel  = new JPanel();
 
-        startDrawing = new JButton("Start Test");
+        draw = new JButton("Start Test");
         contentPane.add(drawingPanel,  BorderLayout.CENTER);
-        contentPane.add(startDrawing, BorderLayout.SOUTH);
-        startDrawing.addActionListener(event -> {
+        contentPane.add(draw, BorderLayout.SOUTH);
+        draw.addActionListener(event -> {
             Graphics g = drawingPanel.getGraphics();
             nonFlyweightObjects = new ArrayList<>();
             long startTime = System.currentTimeMillis();
